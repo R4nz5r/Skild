@@ -29,14 +29,14 @@ const SkillCard = ({
 		};
 	}, []);
 
-	const handleCopy = () => {
-		navigator.clipboard.writeText(installCommand).then(() => {
+	const handleCopy = async () => {
+		try {
+			await navigator.clipboard.writeText(installCommand);
 			setCopied(true);
-			if (timeoutRef.current) {
-				window.clearTimeout(timeoutRef.current);
-			}
-			timeoutRef.current = window.setTimeout(() => setCopied(false), 1500);
-		});
+			setTimeout(() => setCopied(false), 2000);
+		} catch {
+			setCopied(false);
+		}
 	};
 
 	return (
@@ -64,7 +64,11 @@ const SkillCard = ({
 						<img src="/logo512.png" alt="author avater" className="avatar" />
 						<div className="author-copy">
 							<p>Ragib</p>
-							<p>{new Date(createdAt as string).toLocaleDateString()}</p>
+							<p>
+								{createdAt
+									? new Date(createdAt).toLocaleDateString()
+									: "Unknown date"}
+							</p>
 						</div>
 					</div>
 					<p className="category">{category}</p>
