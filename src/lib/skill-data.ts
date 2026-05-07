@@ -1,0 +1,67 @@
+export const skillData: SkillRecord[] = [
+	{
+		id: "skill-001",
+		title: "Write Code",
+		slug: "write-code",
+		description:
+			"Generate working code snippets for frontend and backend tasks using best practices.",
+		category: "Development",
+		tags: ["code", "automation", "productivity"],
+		installCommand: "npm install write-code-skill",
+		createdAt: "2026-05-07T00:00:00.000Z",
+		authorClerkId: "clerk_12345",
+		authorEmail: "author1@example.com",
+	},
+	{
+		id: "skill-002",
+		title: "Design UI",
+		slug: "design-ui",
+		description:
+			"Create polished user interface mockups and responsive component layouts.",
+		category: "Design",
+		tags: ["ui", "ux", "design"],
+		installCommand: "npm install design-ui-skill",
+		createdAt: "2026-05-07T00:00:00.000Z",
+		authorClerkId: "clerk_67890",
+		authorEmail: "author2@example.com",
+	},
+	{
+		id: "skill-003",
+		title: "Test Automation",
+		slug: "test-automation",
+		description:
+			"Build automated test suites for apps, including unit, integration, and e2e test cases.",
+		category: "Quality Assurance",
+		tags: ["testing", "automation", "qa"],
+		installCommand: "npm install test-automation-skill",
+		createdAt: "2026-05-07T00:00:00.000Z",
+		authorClerkId: null,
+		authorEmail: null,
+	},
+	{
+		id: "skill-004",
+		title: "Deploy App",
+		slug: "deploy-app",
+		description:
+			"Configure deployment pipelines and release workflows for cloud-hosted applications.",
+		category: "DevOps",
+		tags: ["deploy", "ci/cd", "cloud"],
+		installCommand: "npm install deploy-app-skill",
+		createdAt: "2026-05-07T00:00:00.000Z",
+		authorClerkId: "clerk_abcdef",
+		authorEmail: "author3@example.com",
+	},
+	{
+		id: "skill-005",
+		title: "Write Blog Post",
+		slug: "write-blog-post",
+		description:
+			"Generate article outlines, drafts, and SEO-friendly copy for technical content.",
+		category: "Content",
+		tags: ["writing", "content", "seo"],
+		installCommand: "npm install write-blog-post-skill",
+		createdAt: null,
+		authorClerkId: null,
+		authorEmail: "author4@example.com",
+	},
+];
