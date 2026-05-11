@@ -4,6 +4,7 @@ import {
 	createRootRouteWithContext,
 	HeadContent,
 	Scripts,
+	useLocation,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import Crosshair from "#/components/Crosshair";
@@ -11,6 +12,8 @@ import Navbar from "#/components/Navbar";
 import {ClerkProvider} from "@clerk/tanstack-react-start"
 import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
+import { PostHogProvider, usePostHog } from "@posthog/react";
+import { useEffect } from "react";
 
 interface MyRouterContext {
 	queryClient: QueryClient;
@@ -47,6 +50,17 @@ export const Route = createRootRouteWithContext<MyRouterContext>()({
 	shellComponent: RootDocument,
 });
 
+function PostHogPageView() {
+	const location = useLocation();
+	const posthog = usePostHog();
+
+	useEffect(() => {
+		posthog.capture("$pageview", { $current_url: window.location.href });
+	}, [location.pathname, posthog]);
+
+	return null;
+}
+
 function RootDocument({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en" suppressHydrationWarning>
@@ -59,6 +73,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 				suppressHydrationWarning
 				className="font-sans antialiased wrap-anywhere"
 			>
+				<PostHogProvider
+					apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_KEY}
+					options={{ api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST }}
+				>
+				<PostHogPageView />
 				<ClerkProvider>
 					<div id="root-layout">
 						<header>
@@ -83,6 +102,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 						]}
 					/>
 				</ClerkProvider>
+				</PostHogProvider>
 				<Scripts />
 			</body>
 		</html>
